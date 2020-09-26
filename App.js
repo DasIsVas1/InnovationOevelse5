@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import firebase from "firebase";
 import {StyleSheet, Text, View} from 'react-native';
-import Card from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import SignUpForm from "./components/SignUpForm";
+import LoginForm from "./components/LoginForm";
+import ProfileScreen from "./components/ProfileScreen";
 
 export default class App extends Component {
 
-    state = {user: null}
+    state = {user:null}
 
     componentDidMount() {
         const firebaseConfig = {
@@ -40,17 +42,21 @@ export default class App extends Component {
         if (!user) {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.paragraph}>
-                        Opret eller login med din firebase email
-                    </Text>
 
-                    <SignUpForm />
+                    <Card>
+                        <SignUpForm/>
+                    </Card>
 
+                    <Card>
+                        <LoginForm/>
+                    </Card>
                 </View>
             )
         } else {
             return (
-                <Text>ProfileScreen</Text>
+                <View>
+                    <ProfileScreen user = {user}/>
+                </View>
             )
         }
     }
